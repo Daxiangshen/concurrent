@@ -36,11 +36,6 @@ public class CreateThreadImplementsRunnable implements Runnable{
         CreateThreadImplementsRunnable thread1=new CreateThreadImplementsRunnable(account);
         new Thread(thread1).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.err.println(account);
-            }
-        }).start();
+        new Thread(() -> System.err.println(account)).start();
     }
 }
