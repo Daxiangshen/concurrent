@@ -2,7 +2,7 @@ package com.concurrent.sleepDemo;
 
 /**
  * <h3>SleepDemo0  Class</h3>
- *
+ * 不释放锁，睡眠结束后进入就绪状态
  * @author : YuXiang
  * @date : 2019-09-19 16:29
  **/
@@ -37,6 +37,7 @@ public class SleepDemo0 {
         t1.start();
         t2.start();
 
+        //打断睡眠
         t1.interrupt();
     }
 }
