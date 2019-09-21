@@ -18,7 +18,7 @@ public class InterruptDemo1 {
 
         t1.start();
 
-        //中断标记设置为ture
+        //中断标记设置为true
         t1.interrupt();
 
         try {
