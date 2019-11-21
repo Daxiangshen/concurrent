@@ -70,7 +70,7 @@ public class DemoThread22 {
         map.put("d",1);
         //如果key已经存在则更新
         map.put("a",2);
-        System.out.println(map);
+         System.out.println(map);
         //如果key存在则不更新,不存在则添加
         map.putIfAbsent("b",2);
         map.putIfAbsent("e",3);
