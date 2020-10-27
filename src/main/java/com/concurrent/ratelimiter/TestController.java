@@ -4,6 +4,8 @@ import com.concurrent.entity.UserReqVO;
 import com.google.common.util.concurrent.RateLimiter;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * TestController class
  *
@@ -18,18 +20,34 @@ public class TestController {
     RateLimiter rateLimiter2=RateLimiter.create(2);
     RateLimiter rateLimiter3=RateLimiter.create(30);
 
+    ConcurrentHashMap<String,RateLimiter> users=new ConcurrentHashMap<>();
 
     @GetMapping("/test1")
     public String test(){
-        double acquire=rateLimiter1.acquire();
-        System.out.println("ok........wait for"+acquire+"seconds");
-        return "ok";
+        String result;
+        //double acquire=rateLimiter1.acquire();
+        boolean tryAcquire=rateLimiter1.tryAcquire();
+        if(tryAcquire){
+            result="ok";
+            System.out.println("ok.......");
+        }else {
+            result="refuse";
+            System.out.println("refuse");
+        }
+        return result;
     }
 
     @PostMapping("/test2")
     public UserReqVO test(@RequestBody UserReqVO user){
-        double acquire=rateLimiter2.acquire();
-        System.out.println("deal data:"+user+"for wait"+acquire+"seconds");
+        String result;
+        String name=user.getName();
+        if(users.get(name)==null){
+
+        }else {
+
+        }
+        boolean tryAcquire=rateLimiter2.tryAcquire();
+
         return user;
     }
 }
