@@ -41,13 +41,19 @@ public class TestController {
     public UserReqVO test(@RequestBody UserReqVO user){
         String result;
         String name=user.getName();
+        RateLimiter rl=null;
         if(users.get(name)==null){
-
+            if("111".equals(name)){
+                rl=RateLimiter.create(1);
+            }else {
+                rl=RateLimiter.create(0.5);
+            }
+            users.put(name,rl);
         }else {
-
+            rl= users.get(name);
         }
-        boolean tryAcquire=rateLimiter2.tryAcquire();
-
+        double acquire=rl.acquire();
+        System.out.println("相同用户限流"+acquire+"秒");
         return user;
     }
 }

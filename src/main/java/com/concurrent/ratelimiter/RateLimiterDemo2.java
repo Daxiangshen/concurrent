@@ -23,7 +23,7 @@ public class RateLimiterDemo2 {
         for (int i=0;i<10;i++){
             //boolean tryAcquire=rateLimiter.tryAcquire();  //并发,没有等待,所以只有一个为true
             //boolean tryAcquire=rateLimiter.tryAcquire(1, TimeUnit.SECONDS); //等待一秒取令牌
-            boolean tryAcquire=rateLimiter.tryAcquire(1, TimeUnit.SECONDS); //等待一秒取令牌,并且一次取出两个令牌
+            boolean tryAcquire=rateLimiter.tryAcquire(2,1, TimeUnit.SECONDS); //等待一秒取令牌,并且一次取出两个令牌
             System.out.println("是否获得许可:"+tryAcquire);
             if(tryAcquire){
                 threadPool.execute(new UserTask(i));
